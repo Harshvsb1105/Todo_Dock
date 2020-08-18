@@ -4,11 +4,11 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_dock/utils/router.dart';
 
 import '../bloc/todo.dart';
 import '../models/pages_arguments.dart';
 import '../models/todo_models.dart';
+import '../router.dart';
 import '../style.dart';
 import '../utils/icons.dart';
 import '../widgets/save_button.dart';

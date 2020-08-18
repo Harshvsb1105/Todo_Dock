@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_dock/utils/router.dart';
 
 import '../bloc/todo.dart';
 import '../models/pages_arguments.dart';
 import '../models/todo_models.dart';
+import '../router.dart';
 import '../style.dart';
 import '../widgets/cover_line.dart';
 import '../widgets/detail_card.dart';
@@ -17,7 +17,7 @@ import '../widgets/empty.dart';
 import '../widgets/neo_pop_up.dart';
 import '../widgets/task_item.dart';
 import '../widgets/text_field.dart';
-import 'add_bottom_sheet.dart';
+import 'add_bottom_shet.dart';
 
 class TodoPage extends StatefulWidget {
   final MainPageArguments args;
