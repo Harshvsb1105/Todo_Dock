@@ -10,6 +10,8 @@ import '../bloc/todo.dart';
 import '../models/pages_arguments.dart';
 import '../models/todo_models.dart';
 
+
+
 import '../style.dart';
 import 'detail_card.dart';
 
@@ -34,7 +36,6 @@ class _CarouselState extends State<Carousel> {
   bool _handlePageNotification(ScrollNotification notification) {
     if (notification.depth == 0 && notification is ScrollUpdateNotification) {
       setState(() {
-        //TODO: need optimiation??
         page = _pageController.page;
       });
     }
@@ -115,14 +116,17 @@ class CategoryCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              HeroIcon(category: category),
+              Center(child: HeroIconRectangular(category: category)),
               const Spacer(),
+              Center(
+                child: HeroCircularProgress(category: category,)
+              ),
               //detail
-              HeroTitle(category: category),
               SizedBox(
                 height: Style.mainPadding,
               ),
-              HeroProgress(category: category)
+              Center(child: HeroTitle(category: category)),
+//              HeroProgress(category: category)
             ],
           ),
         ),

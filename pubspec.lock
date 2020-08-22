@@ -139,6 +139,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.7.5"
+  flutter_local_notifications:
+    dependency: "direct main"
+    description:
+      name: flutter_local_notifications
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.4.4+4"
+  flutter_local_notifications_platform_interface:
+    dependency: transitive
+    description:
+      name: flutter_local_notifications_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   flutter_localizations:
     dependency: transitive
     description: flutter
@@ -149,7 +163,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "2943825ee74e474a4413d7129d2773cfa645eba9"
+      resolved-ref: "0ccb4eec3a53a9e8deae35723fb3bdb82879d63a"
       url: "git://github.com/Idean/Flutter-Neumorphic.git"
     source: git
     version: "3.0.1"
@@ -267,7 +281,7 @@ packages:
       name: path_provider_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "1.0.3"
   pedantic:
     dependency: transitive
     description:
@@ -275,6 +289,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.0"
+  percent_indicator:
+    dependency: "direct main"
+    description:
+      name: percent_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.5"
   petitparser:
     dependency: transitive
     description:
@@ -316,7 +337,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.3.2"
+    version: "4.3.2+1"
   pub_semver:
     dependency: transitive
     description:
@@ -324,6 +345,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.4"
+  rxdart:
+    dependency: "direct main"
+    description:
+      name: rxdart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.24.1"
   shared_preferences:
     dependency: "direct main"
     description:

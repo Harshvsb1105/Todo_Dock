@@ -50,7 +50,8 @@ class SQLiteProvider implements DbInterface {
         'title TEXT NOT NULL,'
         'description TEXT,'
         //sqllite don't have bool type, save like integer and check, deafault 0
-        'completed INTEGER DEFAULT 0 CHECK (completed IN (0,1))'
+        'completed INTEGER DEFAULT 0 CHECK (completed IN (0,1)),'
+        'time TEXT'
         ')');
   }
 

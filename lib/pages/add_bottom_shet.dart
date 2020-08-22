@@ -1,9 +1,11 @@
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_dock/NotificationPlugin.dart';
 
 import '../bloc/todo.dart';
 import '../models/todo_models.dart';
@@ -12,7 +14,8 @@ import '../widgets/text_field.dart';
 
 class AddItemBottomShet extends StatefulWidget {
   final TodoCategory category;
-  AddItemBottomShet({Key key, @required this.category}) : super(key: key);
+
+  AddItemBottomShet({Key key, @required this.category,}) : super(key: key);
 
   @override
   _AddItemBottomShetState createState() => _AddItemBottomShetState();
@@ -22,6 +25,16 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
   String title = '';
   String description = '';
   bool enableDescription = false;
+  TimeOfDay pickedTime;
+  TimeOfDay time = TimeOfDay.now();
+
+
+  @override
+  void initState() {
+    super.initState();
+    notificationPlugin.setListenerForLowerVersions(onNotificationInLowerVersions);
+    notificationPlugin.setOnNotificationClick(onNotificationClick);
+  }
 
   void itemTitleChanget(String title) {
     setState(() {
@@ -39,6 +52,13 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
     setState(() {
       enableDescription = !enableDescription;
       description = '';
+    });
+
+  }
+  Future<Null> selectTime(BuildContext context) async {
+    pickedTime = await showTimePicker(context: context, initialTime: TimeOfDay.now());
+    setState(() {
+      this.time = pickedTime;
     });
   }
 
@@ -58,18 +78,28 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
       await context.read<Todo>().addItem(TodoItem(
           category: widget.category.id,
           title: title,
-          description: description));
+          description: description,
+          time: time.toString(),
+      ));
 
       //go back
       Navigator.of(context).pop();
     }
   }
 
+
+
+  onNotificationInLowerVersions(ReceivedNotification receivedNotification){}
+
+  onNotificationClick(String payload){
+    print('Payload $payload');
+  }
+
   @override
   Widget build(BuildContext context) {
     return AnimatedPadding(
       padding:
-          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       duration: const Duration(milliseconds: 300),
       curve: Curves.decelerate,
       child: Container(
@@ -107,6 +137,19 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
                           color: NeumorphicTheme.defaultTextColor(context)),
                       onPressed: chaneEnableDescription,
                     ),
+                    SizedBox(width: 10,),
+                    NeumorphicButton(
+                      padding: const EdgeInsets.all(16),
+                      style: const NeumorphicStyle(
+                        boxShape: NeumorphicBoxShape.circle(),
+                      ),
+                      child: FaIcon(FontAwesomeIcons.clock,
+                          size: 18,
+                          color: NeumorphicTheme.defaultTextColor(context)),
+                      onPressed: (){
+                        selectTime(context);
+                      },
+                    ),
                     const Spacer(),
                     NeumorphicButton(
                       padding: const EdgeInsets.all(16),
@@ -114,11 +157,11 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
                           boxShape: NeumorphicBoxShape.roundRect(
                               Style.mainBorderRadius)),
                       child: Text('add',
-                              style: TextStyle(
-                                  color: _saveEnable
-                                      ? NeumorphicTheme.accentColor(context)
-                                      : NeumorphicTheme.defaultTextColor(
-                                          context)))
+                          style: TextStyle(
+                              color: _saveEnable
+                                  ? NeumorphicTheme.accentColor(context)
+                                  : NeumorphicTheme.defaultTextColor(
+                                  context)))
                           .tr(),
                       onPressed: saveItem,
                     ),
@@ -140,3 +183,5 @@ void modalBottomSheet(BuildContext context, TodoCategory category) {
         return AddItemBottomShet(category: category);
       });
 }
+
+AddItemBottomShet addItemBottomShet = AddItemBottomShet();

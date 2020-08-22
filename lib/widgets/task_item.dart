@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart';
+  import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_dock/NotificationPlugin.dart';
+import 'package:todo_dock/pages/add_bottom_shet.dart';
 
 import '../bloc/todo.dart';
 import '../models/pages_arguments.dart';
@@ -17,12 +19,13 @@ class TodoItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(item.toString());
     return Neumorphic(
       margin: EdgeInsets.symmetric(vertical: Style.halfPadding),
       style: NeumorphicStyle(
         depth: 3,
         intensity: 0.5,
-        boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),
+        boxShape: NeumorphicBoxShape.roundRect(Style.mainBorderRadius),shape: NeumorphicShape.convex,
       ),
       child: Dismissible(
         key: Key('item_${item.id}'),
@@ -38,6 +41,7 @@ class TodoItemWidget extends StatelessWidget {
           //go to edit page
           onTap: () => unawaited(Navigator.pushNamed(context, '/item/edit',
               arguments: ItemPageArguments(item: item, category: category))),
+          trailing: Text('${item.time.toString()}'),
         ),
         background: Padding(
           padding: const EdgeInsets.all(2.0),
@@ -92,3 +96,4 @@ class TodoItemWidget extends StatelessWidget {
     );
   }
 }
+

@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import '../models/todo_models.dart';
 import '../style.dart';
 import 'animated_percent.dart';
@@ -106,7 +107,9 @@ class HeroIcon extends StatelessWidget {
       tag: 'icon_${category.id}',
       child: Neumorphic(
         padding: const EdgeInsets.all(16),
-        style: const NeumorphicStyle(boxShape: NeumorphicBoxShape.circle()),
+        style: const NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.circle(),
+            shape: NeumorphicShape.convex),
         child: FaIcon(
           category.icon,
           color: Style.primaryColor,
@@ -131,4 +134,86 @@ Widget flightShuttleBuilderFix(
         style: DefaultTextStyle.of(fromHeroContext).style,
         child: fromHeroContext.widget),
   );
+}
+
+class HeroCircularProgress extends StatelessWidget {
+  const HeroCircularProgress({
+    Key key,
+    @required this.category,
+  }) : super(key: key);
+
+  final TodoCategory category;
+
+  @override
+  Widget build(BuildContext context) {
+    return Hero(
+      tag: 'progress_${category.id}',
+      flightShuttleBuilder: flightShuttleBuilderFix,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Center(
+            child: Text(
+              'task_card',
+              style: TextStyle(
+                  color: NeumorphicTheme.defaultTextColor(context)
+                      .withOpacity(0.5),
+                  fontSize: 16.00),
+            ).plural(category.totalItems),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Center(
+              child: CircularPercentIndicator(
+                radius: 200.0,
+                lineWidth: 15.0,
+                percent: category.percent,
+                circularStrokeCap: CircularStrokeCap.round,
+                center: AnimatedPercent(
+              category.percent,
+              style: TextStyle(
+                  color: NeumorphicTheme.defaultTextColor(context)
+                      .withOpacity(0.5),
+                  fontSize: 32.00),
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeOutCubic,
+            ),
+            progressColor: Color(0xffea4c86),
+          )),
+        ],
+      ),
+    );
+  }
+}
+
+class HeroIconRectangular extends StatelessWidget {
+  const HeroIconRectangular({
+    Key key,
+    @required this.category,
+  }) : super(key: key);
+
+  final TodoCategory category;
+
+  @override
+  Widget build(BuildContext context) {
+    return Hero(
+      tag: 'icon_${category.id}',
+      child: Neumorphic(
+        padding: const EdgeInsets.all(16),
+        style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.roundRect(
+                (BorderRadius.all(Radius.circular(30)))),
+            shape: NeumorphicShape.convex),
+        child: Center(
+          widthFactor: 4,
+          child: FaIcon(
+            category.icon,
+            color: Style.primaryColor,
+            size: 32,
+          ),
+        ),
+      ),
+    );
+  }
 }
