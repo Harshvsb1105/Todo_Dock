@@ -29,18 +29,18 @@ class TodoCategory extends TodoModel {
 
   const TodoCategory(
       {this.id,
-      this.title = '',
-      this.icon,
-      this.completed = 0,
-      this.totalItems = 0});
+        this.title = '',
+        this.icon,
+        this.completed = 0,
+        this.totalItems = 0});
 
   factory TodoCategory.fromMap(Map<String, dynamic> map) => TodoCategory(
-        id: map['id'] as int,
-        title: map['title'] as String,
-        icon: map['icon'].toString().getFontAwesomeIcon,
-        completed: map['completed'] as int,
-        totalItems: map['totalItems'] as int,
-      );
+    id: map['id'] as int,
+    title: map['title'] as String,
+    icon: map['icon'].toString().getFontAwesomeIcon,
+    completed: map['completed'] as int,
+    totalItems: map['totalItems'] as int,
+  );
 
   double get percent {
     if (totalItems == 0) {
@@ -119,25 +119,30 @@ class TodoItem extends TodoModel {
   final String title;
   final String description;
   final bool completed;
+  final String time;
 
   static const String table = 'Items';
 
   const TodoItem(
       {this.id,
-      this.category,
-      this.title = '',
-      this.description = '',
-      this.completed = false});
+        this.category,
+        this.title = '',
+        this.description = '',
+        this.completed = false,
+      this.time});
 
   @override
   Map<String, dynamic> toMap() {
+    print("this is time: $time");
+
     var map = <String, dynamic>{
       'category': category,
       'title': title,
       'description': description,
-      'completed': completed ? '1' : '0'
+      'completed': completed ? '1' : '0',
+      'time' : time
     };
-
+  print("this is time: $time");
     if (id != null) {
       map['id'] = id;
     }
@@ -149,14 +154,16 @@ class TodoItem extends TodoModel {
       category: map['category'] as int,
       title: map['title'] as String,
       description: map['description'] as String,
-      completed: map['completed'] == 1);
+      completed: map['completed'] == 1,
+      time: map['time'] as String,
+  );
 
   @override
-  List<Object> get props => [id, category, title, description, completed];
+  List<Object> get props => [id, category, title, description, completed, time];
 
   @override
   String toString() {
-    return 'TodoItem(id: $id, category: $category, title: $title, description: $description, completed: $completed)';
+    return 'TodoItem(id: $id, category: $category, title: $title, description: $description, completed: $completed, time: $time)';
   }
 
   // @override
@@ -186,6 +193,7 @@ class TodoItem extends TodoModel {
     String title,
     String description,
     bool completed,
+    String time,
   }) {
     return TodoItem(
       id: id ?? this.id,
@@ -193,6 +201,7 @@ class TodoItem extends TodoModel {
       title: title ?? this.title,
       description: description ?? this.description,
       completed: completed ?? this.completed,
+      time: time ?? this.time,
     );
   }
 }
