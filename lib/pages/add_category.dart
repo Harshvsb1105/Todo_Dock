@@ -125,28 +125,30 @@ class _AddCategoryState extends State<AddCategory> {
                           TextFieldLabel('add_category.icon'.tr()),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 8),
-                            child: Wrap(
-                              alignment: WrapAlignment.spaceAround,
-                              runSpacing: 16,
-                              spacing: 16,
-                              children: icons_list.entries
-                                  .map((item) => NeumorphicRadio(
-                                        groupValue: icon,
-                                        padding: const EdgeInsets.all(16),
-                                        style: const NeumorphicRadioStyle(
-                                          boxShape: NeumorphicBoxShape.circle(),
-                                        ),
-                                        value: item.value,
-                                        child: FaIcon(item.value,
-                                            size: 18,
-                                            color: item.value == icon
-                                                ? NeumorphicTheme.accentColor(
-                                                    context)
-                                                : NeumorphicTheme
-                                                    .defaultTextColor(context)),
-                                        onChanged: iconChanget,
-                                      ))
-                                  .toList(),
+                            child: Center(
+                              child: Wrap(
+                                alignment: WrapAlignment.spaceAround,
+                                runSpacing: 16,
+                                spacing: 16,
+                                children: icons_list.entries
+                                    .map((item) => NeumorphicRadio(
+                                          groupValue: icon,
+                                          padding: const EdgeInsets.all(16),
+                                          style: const NeumorphicRadioStyle(
+                                            boxShape: NeumorphicBoxShape.circle(),shape: NeumorphicShape.convex,
+                                          ),
+                                          value: item.value,
+                                          child: FaIcon(item.value,
+                                              size: 18,
+                                              color: item.value == icon
+                                                  ? NeumorphicTheme.accentColor(
+                                                      context)
+                                                  : NeumorphicTheme
+                                                      .defaultTextColor(context)),
+                                          onChanged: iconChanget,
+                                        ))
+                                    .toList(),
+                              ),
                             ),
                           ),
                         ],

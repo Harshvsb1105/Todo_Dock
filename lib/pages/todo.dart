@@ -84,7 +84,7 @@ class _TodoPageState extends State<TodoPage> {
                     old_category != new_category,
                 builder: (context, category, _) {
                   if (category == null) {
-                    //return empty container when category deletet
+                    //return empty container when category delete
                     return const SizedBox.shrink();
                   }
                   return Row(
@@ -175,7 +175,7 @@ class CategoryAppBar extends StatelessWidget implements PreferredSizeWidget {
               old_category != new_category,
           builder: (context, category, _) {
             if (category == null) {
-              //return empty container when category deletet
+              //return empty container when category delete
               return const SizedBox.shrink();
             }
             return HeroTitle(category: category);
@@ -234,8 +234,8 @@ class ListBody extends StatelessWidget {
         opacity: _transistionPageEnd ? 1 : 0,
         duration: const Duration(milliseconds: 300),
         child: Builder(builder: (context) {
-          //if page transistion not endede show empty widget
-          //beter for perfomance
+          //if page transition not ended show empty widget
+          //better for performance
           if (!_transistionPageEnd) {
             return const SizedBox.shrink();
           }
@@ -306,32 +306,6 @@ class ListBody extends StatelessWidget {
               CoverLine(
                 alignment: Alignment.bottomCenter,
               ),
-              /*Container(
-                  height: Style.mainPadding,
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      NeumorphicTheme.baseColor(context),
-                      NeumorphicTheme.baseColor(context).withOpacity(0)
-                    ],
-                  ))),
-              //bottom cover gradient
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                    height: Style.mainPadding,
-                    decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [
-                        NeumorphicTheme.baseColor(context),
-                        NeumorphicTheme.baseColor(context).withOpacity(0)
-                      ],
-                    ))),
-              ),*/
             ],
           );
         }),

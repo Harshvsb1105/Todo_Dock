@@ -65,28 +65,7 @@ class TodoCategory extends TodoModel {
     return map;
   }
 
-  //override bool operator ==
 
-  // @override
-  // bool operator ==(Object o) {
-  //   if (identical(this, o)) return true;
-
-  //   return o is TodoCategory &&
-  //       o.id == id &&
-  //       o.title == title &&
-  //       o.icon == icon &&
-  //       o.completed == completed &&
-  //       o.totalItems == totalItems;
-  // }
-
-  // @override
-  // int get hashCode {
-  //   return id.hashCode ^
-  //       title.hashCode ^
-  //       icon.hashCode ^
-  //       completed.hashCode ^
-  //       totalItems.hashCode;
-  // }
   @override
   List<Object> get props => [id, title, icon, completed, totalItems];
 
@@ -133,8 +112,6 @@ class TodoItem extends TodoModel {
 
   @override
   Map<String, dynamic> toMap() {
-    print("this is time: $time");
-
     var map = <String, dynamic>{
       'category': category,
       'title': title,
@@ -142,7 +119,6 @@ class TodoItem extends TodoModel {
       'completed': completed ? '1' : '0',
       'time' : time
     };
-  print("this is time: $time");
     if (id != null) {
       map['id'] = id;
     }
@@ -165,27 +141,6 @@ class TodoItem extends TodoModel {
   String toString() {
     return 'TodoItem(id: $id, category: $category, title: $title, description: $description, completed: $completed, time: $time)';
   }
-
-  // @override
-  // bool operator ==(Object o) {
-  //   if (identical(this, o)) return true;
-
-  //   return o is TodoItem &&
-  //       o.id == id &&
-  //       o.category == category &&
-  //       o.title == title &&
-  //       o.description == description &&
-  //       o.completed == completed;
-  // }
-
-  // @override
-  // int get hashCode {
-  //   return id.hashCode ^
-  //       category.hashCode ^
-  //       title.hashCode ^
-  //       description.hashCode ^
-  //       completed.hashCode;
-  // }
 
   TodoItem copyWith({
     int id,

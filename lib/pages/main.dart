@@ -36,13 +36,23 @@ class MainPage extends StatelessWidget {
                   shouldRebuild: (old_total, new_total) =>
                       old_total != new_total,
                   builder: (_, total_items, __) {
-                    return Text(
-                      'task_count',
-                      style: TextStyle(
-                          color: NeumorphicTheme.defaultTextColor(context)
-                              .withOpacity(0.5),
-                          fontSize: 16.00),
-                    ).plural(total_items);
+                    return Row(
+                      children: [
+                        Text(
+                          'task_count',
+                          style: TextStyle(
+                              color: NeumorphicTheme.defaultTextColor(context)
+                                  .withOpacity(0.5),
+                              fontSize: 16.00),
+                        ).plural(total_items),
+                        Text(' left.',
+                          style: TextStyle(
+                              color: NeumorphicTheme.defaultTextColor(context)
+                                  .withOpacity(0.5),
+                              fontSize: 16.00),
+                        )
+                      ],
+                    );
                   }),
             ),
             const Carousel(),

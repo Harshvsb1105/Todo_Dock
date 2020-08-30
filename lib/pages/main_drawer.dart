@@ -90,13 +90,14 @@ class About extends StatelessWidget {
             ),
             onTap: () => showAboutDialog(
               context: context,
+              applicationName: 'Todo Dock',
               applicationVersion: snapshot.data.version.toString(),
               applicationIcon: Image.asset(
-                'assets/icon/icon.png',
+                'assets/icon/todo_dock.png',
                 height: 50,
               ),
               children: [
-                Text('settings.about_text'.tr()),
+                Text('Developed by Harshvardhan Singh Bhadouria',textAlign: TextAlign.center,),
                 Padding(
                   padding: const EdgeInsets.only(top: Style.mainPadding),
                   child: Row(
@@ -111,7 +112,7 @@ class About extends StatelessWidget {
                                 color: NeumorphicTheme.accentColor(context),
                               ),
                               onPressed: () =>
-                                  launch('https://github.com/Overman775')),
+                                  launch('https://github.com/Harshvsb1105')),
                           const Text('Github')
                         ],
                       ),
@@ -124,7 +125,7 @@ class About extends StatelessWidget {
                                 color: NeumorphicTheme.accentColor(context),
                               ),
                               onPressed: () =>
-                                  launch('https://twitter.com/AlexeyZd')),
+                                  launch('https://twitter.com/Harsh90300784')),
                           const Text('Twitter')
                         ],
                       ),
@@ -137,8 +138,8 @@ class About extends StatelessWidget {
                                 color: NeumorphicTheme.accentColor(context),
                               ),
                               onPressed: () => launch(
-                                  'https://www.linkedin.com/in/overman775/')),
-                          const Text('Linkedin')
+                                  'https://www.linkedin.com/in/harshvardhan-bhadouria-b02587160/')),
+                          const Text('LinkedIn')
                         ],
                       )
                     ],
@@ -167,7 +168,7 @@ class _HeadDrawerState extends State<HeadDrawer> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return DrawerHeader(
       child: Center(
-        child: NeumorphicText('title'.tr(),
+        child: NeumorphicText('Todo Dock',
             textStyle:
                 NeumorphicTextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
       ),

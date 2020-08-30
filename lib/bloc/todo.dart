@@ -91,21 +91,6 @@ class Todo extends ChangeNotifier {
     await getCategoryes(notify: false);
     await getItems(new_item.category, notify: false);
 
-    /*
-    unawaited(SQLiteProvider.db.update(TodoItem.table, new_item));
-    //overwrrite TodoItem
-    updateItem(new_item);
-
-    final category_index =
-        categoryes.indexWhere((old_item) => old_item.id == item.category);
-    final old_category = categoryes[category_index];
-    final new_category = categoryes[category_index].copyWith(
-      completed: new_item.completed
-          ? old_category.completed + 1
-          : old_category.completed - 1,
-    );
-    updateCategory(new_category, index: category_index);
-    */
 
     notifyListeners();
     log('Item toggle ${item.title}');

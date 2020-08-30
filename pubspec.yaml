@@ -30,9 +30,10 @@ dependencies:
   url_launcher: ^5.5.0
   package_info: ^0.4.1
   expandable: ^4.1.4
-  flutter_local_notifications: ^1.4.4+4
   percent_indicator: ^2.1.5
   rxdart: ^0.24.1
+  flutter_local_notifications: ^1.4.4+4
+
 
 
 
@@ -44,12 +45,12 @@ dev_dependencies:
   flutter_launcher_icons: ^0.7.5
 
 flutter_icons:
-  image_path: "assets/icon/icon.png"
-  android: true
-  ios: false
-  adaptive_icon_background: "#dedede" # only available for Android 8.0 devices and above
-  adaptive_icon_foreground: "assets/icon/icon_foreground.png" # only available for Android 8.0 devices and above
-#flutter pub run flutter_launcher_icons:main
+  image_path: "assets/icon/todo_dock.png"
+  android: 'launcher_icon'
+  ios: true
+#  adaptive_icon_background: "#dedede" # only available for Android 8.0 devices and above
+#  adaptive_icon_foreground: "assets/icon/icon_foreground.png" # only available for Android 8.0 devices and above
+##flutter pub run flutter_launcher_icons:main
 
 flutter:
   uses-material-design: true

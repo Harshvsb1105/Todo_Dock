@@ -1,4 +1,5 @@
 
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -14,8 +15,9 @@ import '../widgets/text_field.dart';
 
 class AddItemBottomShet extends StatefulWidget {
   final TodoCategory category;
+  final NotificationPlugin notificationPlugin;
 
-  AddItemBottomShet({Key key, @required this.category,}) : super(key: key);
+  AddItemBottomShet({Key key, @required this.category, this.notificationPlugin}) : super(key: key);
 
   @override
   _AddItemBottomShetState createState() => _AddItemBottomShetState();
@@ -26,7 +28,11 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
   String description = '';
   bool enableDescription = false;
   TimeOfDay pickedTime;
-  TimeOfDay time = TimeOfDay.now();
+  String time;
+  int hr;
+  int min;
+
+
 
 
   @override
@@ -53,13 +59,21 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
       enableDescription = !enableDescription;
       description = '';
     });
-
   }
-  Future<Null> selectTime(BuildContext context) async {
-    pickedTime = await showTimePicker(context: context, initialTime: TimeOfDay.now());
-    setState(() {
-      this.time = pickedTime;
+
+  Future<void> selectTime(NotificationPlugin notificationPlugin) async {
+    print('time of the day');
+       await showTimePicker(context: context, initialTime: TimeOfDay.now())
+        .then((value) async {
+          print('hello whats the time : ${value.hour} & ${value.minute}');
+          hr = value.hour;
+          min = value.minute;
+          notificationPlugin.showDailyAtTime(hr, min);
+          setState(() {
+            this.time = '$hr:$min';
+          });
     });
+
   }
 
   bool get _saveEnable {
@@ -79,15 +93,13 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
           category: widget.category.id,
           title: title,
           description: description,
-          time: time.toString(),
+          time: time,
       ));
 
       //go back
       Navigator.of(context).pop();
     }
   }
-
-
 
   onNotificationInLowerVersions(ReceivedNotification receivedNotification){}
 
@@ -130,7 +142,7 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
                     NeumorphicButton(
                       padding: const EdgeInsets.all(16),
                       style: const NeumorphicStyle(
-                        boxShape: NeumorphicBoxShape.circle(),
+                        boxShape: NeumorphicBoxShape.circle(),shape: NeumorphicShape.convex,
                       ),
                       child: FaIcon(FontAwesomeIcons.bars,
                           size: 18,
@@ -141,13 +153,13 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
                     NeumorphicButton(
                       padding: const EdgeInsets.all(16),
                       style: const NeumorphicStyle(
-                        boxShape: NeumorphicBoxShape.circle(),
+                        boxShape: NeumorphicBoxShape.circle(),shape: NeumorphicShape.convex,
                       ),
                       child: FaIcon(FontAwesomeIcons.clock,
                           size: 18,
                           color: NeumorphicTheme.defaultTextColor(context)),
-                      onPressed: (){
-                        selectTime(context);
+                      onPressed: () async {
+                       await selectTime(notificationPlugin);
                       },
                     ),
                     const Spacer(),
@@ -155,7 +167,7 @@ class _AddItemBottomShetState extends State<AddItemBottomShet> {
                       padding: const EdgeInsets.all(16),
                       style: NeumorphicStyle(
                           boxShape: NeumorphicBoxShape.roundRect(
-                              Style.mainBorderRadius)),
+                              Style.mainBorderRadius),shape: NeumorphicShape.convex,),
                       child: Text('add',
                           style: TextStyle(
                               color: _saveEnable
@@ -184,4 +196,5 @@ void modalBottomSheet(BuildContext context, TodoCategory category) {
       });
 }
 
-AddItemBottomShet addItemBottomShet = AddItemBottomShet();
+
+
